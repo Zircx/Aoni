@@ -1,0 +1,572 @@
+/* ==========================================
+   RESET, SMOOTH SCROLL & ATURAN GLOBAL
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Suwannaphum', serif;
+}
+
+html {
+    scroll-behavior: smooth; 
+    scroll-padding-top: 80px; 
+}
+
+body {
+    background-color: #E2DACB; 
+    color: #262626;
+    line-height: 1.6;
+    overflow-x: hidden; /* Mencegah layar goyang atau bocor ke kanan di HP */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Grid System Responsif Bawaan Mobile (1 Kolom Vertikal) */
+.grid-2, .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Media Query Layar Lebar (Desktop/Tablet) */
+@media (min-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .grid-3 { grid-template-columns: 1fr 1fr 1fr; gap: 50px; }
+}
+
+/* ==========================================
+   NAVBAR (MOBILE RESPONSIVE FIXED & INTERACTIVE)
+   ========================================== */
+.navbar, 
+.navbar * {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #E2DACB;
+    z-index: 110;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #c7bca6;
+}
+
+@media (min-width: 768px) {
+    .navbar { padding: 15px 40px; }
+}
+
+.nav-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-title {
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.logo-subtitle {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #525252;
+    margin-top: -2px;
+}
+
+/* Default Tampilan Navbar di Smartphone (Tertutup & Dropdown Kebawah) */
+.nav-links {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #E2DACB;
+    padding: 20px;
+    gap: 20px;
+    text-align: center;
+    border-bottom: 1px solid #c7bca6;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+}
+
+/* Class pembuka saat tombol hamburger di-klik JavaScript */
+.nav-links.active {
+    display: flex;
+}
+
+.nav-links a {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px 0;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #8C4F2B;
+}
+
+/* Tombol hamburger selalu tampil di HP */
+.nav-toggle {
+    display: block;
+    font-size: 26px;
+    cursor: pointer;
+    user-select: none;
+    padding: 5px;
+    z-index: 120;
+}
+
+/* Penyesuaian Struktur Navbar untuk Desktop */
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        padding: 0;
+        background-color: transparent;
+        border-bottom: none;
+        box-shadow: none;
+        gap: 30px;
+    }
+    .nav-links a { font-size: 14px; padding: 0; }
+    .nav-toggle { display: none; } /* Sembunyikan hamburger di laptop */
+}
+
+/* ==========================================
+   HERO / GALLERY SECTION (RESPONSIVE)
+   ========================================== */
+.hero-gallery {
+    display: flex;
+    width: 100%;
+    height: auto; 
+    overflow: hidden;
+    background-color: #fff;
+    gap: 0; 
+}
+
+.hero-gallery img {
+    flex: 1; 
+    width: 33.333%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    transform-origin: center;
+    transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                filter 0.5s ease;
+}
+
+.hero-gallery img:hover {
+    flex: 1.5; 
+    transform: scale(1.04); 
+    filter: brightness(1.05);
+    z-index: 2; 
+}
+
+.hero-gallery:hover img:not(:hover) {
+    flex: 0.75; 
+    filter: brightness(0.85) grayscale(10%);
+}
+
+/* ==========================================
+   WHY CHOOSE US SECTION
+   ========================================== */
+.info-section {
+    background: linear-gradient(90deg, #d8cfbc 35%, #b29d80 100%);
+    padding: 50px 0;
+    width: 100%;    
+}
+
+@media (min-width: 768px) {
+    .info-section { padding: 90px 0; }
+}
+
+.info-text h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #171717;
+}
+
+@media (min-width: 768px) {
+    .info-text h2 { font-size: 32px; margin-bottom: 20px; }
+}
+
+.info-text p {
+    text-align: justify;
+    color: #262626;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.info-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .info-image { margin-top: 0; }
+}
+
+.info-image img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .info-image img { max-width: 380px; }
+}
+
+.info-image img:hover {
+    transform: translateY(-12px);
+    filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.3));
+}
+
+/* ==========================================
+   MENU SPECIALTY SECTION (AUTO LAYOUT RE-STRUCTURE)
+   ========================================== */
+.menu-section {
+    background: radial-gradient(circle at left top, #c17c36 0%, #32251a 85%); 
+    padding: 60px 0 80px 0;   
+    text-align: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .menu-section { padding: 100px 0 120px 0; }
+}
+
+.menu-section-title {
+    font-size: 36px; 
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 140px; /* Jarak untuk mengantisipasi letak cangkir di HP */
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+@media (min-width: 768px) {
+    .menu-section-title { font-size: 48px; margin-bottom: 160px; }
+    .menu-grid-container { margin-top: 100px; }
+}
+
+.menu-card {
+    background-color: #ffffff;
+    color: #262626;
+    padding: 0px 30px 45px 30px; 
+    border-radius: 0px; 
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: visible; 
+    margin-top: 130px; /* Memberi ruang aman antar card vertikal di HP */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+@media (min-width: 768px) {
+    .menu-card { margin-top: 0; padding: 0px 40px 65px 40px; }
+}
+
+.menu-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Kontainer Bulatan Cangkir yang Fleksibel di HP */
+.card-cup-img {
+    width: 240px;  
+    height: 240px;
+    margin-top: -120px; /* Menarik tepat setengah dari 240px */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+@media (min-width: 768px) {
+    .card-cup-img { width: 310px; height: 310px; margin-top: -155px; }
+}
+
+.card-cup-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    border-radius: 50%; 
+    display: block;
+    filter: drop-shadow(0 25px 20px rgba(0, 0, 0, 0.55)); 
+}
+
+.menu-card h3 {
+    font-size: 24px; 
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 12px;
+    margin-top: 20px; 
+}
+
+@media (min-width: 768px) {
+    .menu-card h3 { font-size: 26px; margin-top: 35px; }
+}
+
+.menu-card p {
+    font-size: 14px; 
+    line-height: 1.6;
+    text-align: left; 
+    color: #262626;
+}
+
+/* ==========================================
+   BANNER: MORNING HAPPY HOURS
+   ========================================== */
+.happy-hours-banner {
+    background-image: url('../assets/RIAL.png'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 100%;
+}
+
+.happy-hours-overlay {
+    background-color: rgba(43, 22, 12, 0.4); 
+    padding: 60px 15px;
+    text-align: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .happy-hours-overlay { padding: 80px 20px; }
+}
+
+.happy-hours-banner h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #FFF4E0; 
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); 
+}
+
+@media (min-width: 768px) {
+    .happy-hours-banner h2 { font-size: 42px; }
+}
+
+.happy-hours-banner p {
+    text-align: center;
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: #ffffff;
+    line-height: 1.7;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================
+   OUR STORY SECTION
+   ========================================== */
+.story-section {
+    background: linear-gradient(to bottom, #D8CFBC, #B29D80);
+    padding: 50px 0;
+}
+
+@media (min-width: 768px) {
+    .story-section { padding: 90px 0; }
+}
+
+.story-text h2 {
+    color: #171717;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .story-text h2 { font-size: 36px; margin-bottom: 20px; }
+}
+
+.story-text p {
+    color: #1a1a1a;
+    text-align: justify;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.story-image {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .story-image { order: -1; margin-bottom: 0; } /* Gambar di kiri pada desktop */
+}
+
+.story-image-box {
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+@media (min-width: 768px) {
+    .story-image-box { height: 350px; }
+}
+
+.story-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer {
+    background-color: #F5EFE6;
+    padding: 50px 0 20px 0;
+    border-top: 1px solid #c7bca6;
+}
+
+.footer-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .footer-logo-container { align-items: flex-start; margin-bottom: 0; }
+}
+
+.footer-logo-box {
+    width: 100%;
+    max-width: 160px;
+}
+
+@media (min-width: 768px) {
+    .footer-logo-box { max-width: 220px; }
+}
+
+.footer-logo-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .footer-contact { gap: 24px; font-size: 15px; }
+}
+
+.contact-group h4 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon-wrapper {
+    display: block;
+    max-width: 160px; 
+    width: 100%;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .social-icon-wrapper { max-width: 180px; }
+}
+
+.social-icon-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; 
+}
+
+.social-icon-wrapper:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+.footer-copyright {
+    text-align: center;
+    font-size: 11px;
+    color: #737373;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(199, 188, 166, 0.6);
+}
+
+/* ==========================================
+   FOOTER CUSTOM CONTACT ICONS
+   ========================================== */
+.contact-item {
+    display: flex;
+    align-items: flex-start; 
+    gap: 12px;               
+    margin-top: 8px;
+}
+
+.contact-icon {
+    width: 18px;           
+    height: 18px;            
+    object-fit: contain;   
+    flex-shrink: 0;        
+    margin-top: 3px;        
+}
